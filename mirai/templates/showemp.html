@@ -1,0 +1,77 @@
+<!-- 
+  showemp.html
+  ------------
+  - Displays a list of all employees.
+  - Each row includes action buttons for deleting or updating the employee.
+  - Uses Bootstrap for layout and styles.
+  - Context: 'employees' is passed from the Django view.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Bootstrap CDN for consistent styling -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <center>
+      <div>
+        <h2 class="bg-primary text-white">List of Employees</h2>
+      </div>
+    </center>
+    <table class="table">
+      <thead class="bg-danger text-white">
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Company</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {# Loop over employees passed from the backend #}
+        {% for employee in employees %}
+        <tr>
+          <td>{{employee.eFname}}</td>
+          <td>{{employee.eLname}}</td>
+          <td>{{employee.eCompany}}</td>
+          <td>{{employee.eEmail}}</td>
+          <td>{{employee.ePhone}}</td>
+          <td>
+            <!-- 
+              Delete: Confirmation popup ensures accidental deletes don't happen.
+              Update: Navigates to edit page for this employee.
+            -->
+            <a
+              class="btn btn-danger btn-sm"
+              href="{% url 'deleteEmp' employee.id %}"
+              onclick="return confirm('Are you sure you want to delete this employee?');"
+            >
+              Delete
+            </a>
+            <a
+              class="btn btn-success btn-sm"
+              href="{% url 'editemp' employee.id %}"
+            >
+              Update
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- 
+  login.html
+  -----------
+  Template for the admin login page.
+  - Extends the main base.html for layout and styles.
+  - Displays a login form using Django's authentication system.
+  - Shows errors in a user-friendly way. -->
+
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="container" style="max-width: 400px; margin-top: 40px;">
+    <!-- Page title for the login form -->
+    <h2 style="color: white;">Admin Login</h2>
+    <!-- Login form. Uses Django's form system. -->
+    <form method="post" class="form">
+        {% csrf_token %}
+        <div style="color: beige;">
+            {{ form.as_p }}
+        </div>
+        <br>
+        <!-- Submit button for the login form -->
+        <button class="btn btn-success" type="submit">Login</button>
+    </form>
+</div>
+{% endblock %}
