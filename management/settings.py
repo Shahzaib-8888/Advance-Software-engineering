@@ -11,7 +11,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-your-default-key')  # Change for production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'  # False in production
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')  # Specific hosts in production
+ALLOWED_HOSTS = ['*']
 
 # Apps
 INSTALLED_APPS = [
